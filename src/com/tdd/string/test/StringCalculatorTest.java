@@ -1,12 +1,13 @@
 package com.tdd.string.test;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.tdd.string.calc.StringCalculator;
 
 public class StringCalculatorTest {
-
+	
 	// Requirement 1 : input to be within 2 numbers
 	@Test
 	public final void isWithinTwoInputs() {
@@ -43,12 +44,6 @@ public class StringCalculatorTest {
 		StringCalculator.add("1,2,-3");
 	}
 
-	// Requirement 7: number of times method has been invoked
-	@Test
-	public final void isMethodInvoked() {
-		// TODO to write test case
-	}
-
 	// Requirement 9: ignore bigger numbers
 	@Test
 	public final void isNegativeNumber() {
@@ -60,5 +55,24 @@ public class StringCalculatorTest {
 	public final void isDelimeterAnyLength() {
 		Assert.assertEquals(6, StringCalculator.add("//[---]\n1---2---3"));
 	}
+	
+	// Requirement 11: multiple delimiters
+	@Test
+	public final void isMultipleDelimiter() {
+		Assert.assertEquals(6, StringCalculator.add("//[-][%]\n1-2%3"));
+	}
 
+	// Requirement 12: multiple delimiters of any length
+	@Test
+	public final void isMultipleDelimiterAnyLength() {
+		Assert.assertEquals(6, StringCalculator.add("//[--][%%]\n1--2--3"));
+	}
+	
+	// Requirement 7: number of times method has been invoked
+	@AfterClass
+	public static void isMethodInvoked() {
+		Assert.assertEquals(10,StringCalculator.getCalledCount());
+	}
+
+	
 }
